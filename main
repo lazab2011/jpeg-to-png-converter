@@ -1,0 +1,30 @@
+import os
+from PIL import Image
+
+def jpeg_to_png(in_path, des_path):
+    # Check if the destination path exists
+    if not os.path.exists(des_path):
+        os.makedirs(des_path)
+        print(f"Created directory: {des_path}")
+    print(f"Directory already exists: {des_path}")
+
+    for file in os.listdir(in_path):
+        if file.endswith(".jpg") or file.endswith(".jpeg"):
+            # Get full path of JPEG file
+            jpeg_file = os.path.join(in_path, file)
+            # Name of the new PNG file
+            png_file = os.path.join(des_path, f"{os.path.splitext(file)[0]}.png")
+
+            print(f"Converting {jpeg_file} to {png_file}")
+
+            # Open the JPEG file and save it as PNG file
+            with Image.open(jpeg_file) as img:
+                img.save(png_file, format="PNG")
+
+# path of input and output directories
+
+in_path = r"C:\Link\to\Current\Directory\images"
+des_path = r"./html/"
+
+jpeg_to_png(in_path, des_path)
+
